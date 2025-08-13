@@ -8,11 +8,9 @@ class Story(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
+    session_id = Column(String, index=True)
     content = Column(String)
     created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, onupdate=func.now())
-    is_published = Column(Boolean, default=False)
-    author_id = Column(Integer, ForeignKey("users.id"))
-    tags = Column(JSON)
 
-    author = relationship("User", back_populates="stories")
+
+    nodes = relationship("StoryNode", back_populates="story")
